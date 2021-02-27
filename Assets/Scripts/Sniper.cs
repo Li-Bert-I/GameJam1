@@ -1,12 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingEnemy : MonoBehaviour
+public class Sniper : MonoBehaviour
 {
     public GameObject target;
-    public Transform pathRight;
-    public Transform pathLeft;
 
     public GameObject bulletEmitter;
     public GameObject bulletPrefab;
@@ -14,7 +12,7 @@ public class ShootingEnemy : MonoBehaviour
     public float bulletLifeTime = 5.0f;
 
     public float shootingDelay = 1.0f;
-    public float shootingRange = 10.0f;
+    public float shootingRange = 15.0f;
     public float speed = 1.0f;
 
     private bool shooting;
@@ -26,25 +24,6 @@ public class ShootingEnemy : MonoBehaviour
     bool IsPlayerClose()
     {
         return (target.transform.position - transform.position).magnitude <= shootingRange;
-    }
-
-    bool SeePlayer()
-    {
-        return (target.transform.position - transform.position)[0] >= 0 == walks_right;
-    }
-
-    bool TooRight()
-    {
-        if (pathRight.position[0] <= transform.position[0])
-            return true;
-        return false;
-    }
-
-    bool TooLeft()
-    {
-        if (pathLeft.position[0] >= transform.position[0])
-            return true;
-        return false;
     }
 
     void ShootBullet()
@@ -60,8 +39,7 @@ public class ShootingEnemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        shooting = IsPlayerClose() && SeePlayer();
-        walking = !shooting;
+        shooting = IsPlayerClose();
 
         if (shooting)
         {
@@ -73,27 +51,18 @@ public class ShootingEnemy : MonoBehaviour
         }
         shootingTimer += Time.deltaTime;
 
-        if (!looks_right && walks_right)
+        bool player_on_right = (target.transform.position - transform.position)[0] >= 0;
+        if (!looks_right && player_on_right)
         {
             Flip();
-        } else if (looks_right && !walks_right)
+        } else if (looks_right && !player_on_right)
         {
             Flip();
-        }
-
-        if (walking)
-        {
-            float mov_x = 1.0f;
-            if (!walks_right)
-                 mov_x = -1.0f;
-            transform.Translate(mov_x * speed * Time.deltaTime, 0, 0);
-            walks_right = (TooLeft() || TooRight()) ? (TooLeft() && !TooRight()) : (walks_right);
         }
     }
 
     void Flip()
     {
-        Debug.Log("Flipped");
         looks_right = !looks_right;
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
