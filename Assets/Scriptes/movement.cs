@@ -1,17 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class movement : MonoBehaviour
 {
-    public float speed;
+    private float speed = 3;
+    private float fill;
     public float jump_force;
-    private Rigidbody2D rb;
+    public static Rigidbody2D rb;
     private bool look_right = true;
     private bool is_grounded;
     public Transform ground_check;
     public float check_radius;
     public LayerMask what_is_groud;
+    public Image Bar;
+    public float baseSpeed = 2.0f;
+    public float adrenalinSpeed = 1.0f;
 
     void Start()
     {
@@ -20,6 +25,8 @@ public class movement : MonoBehaviour
 
     void FixedUpdate()
     {
+        fill = Bar.fillAmount;
+        //speed = adrenalinSpeed * fill + baseSpeed;
         is_grounded = Physics2D.OverlapCircle(ground_check.position, check_radius, what_is_groud);
         float mov_x = Input.GetAxis("Horizontal");
 
@@ -36,10 +43,15 @@ public class movement : MonoBehaviour
 
         if (is_grounded)
         {
+            rb.gravityScale = 0;
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 rb.AddForce(new Vector2(0, jump_force), ForceMode2D.Impulse);
             }
+        }
+        else
+        {
+            rb.gravityScale = 1;
         }
 
     }
