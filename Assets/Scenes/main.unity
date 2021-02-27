@@ -292,6 +292,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass
       objectReference: {fileID: 0}
+    - target: {fileID: 8750527554370514136, guid: 566ec65f9219f564f9a5f52668b8040f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 566ec65f9219f564f9a5f52668b8040f, type: 3}
 --- !u!1001 &761896465
@@ -360,6 +365,80 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Grass (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 566ec65f9219f564f9a5f52668b8040f, type: 3}
+--- !u!1001 &766134729
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2195290570284922008, guid: 566ec65f9219f564f9a5f52668b8040f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195290570284922008, guid: 566ec65f9219f564f9a5f52668b8040f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195290570284922008, guid: 566ec65f9219f564f9a5f52668b8040f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195290570284922008, guid: 566ec65f9219f564f9a5f52668b8040f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195290570284922008, guid: 566ec65f9219f564f9a5f52668b8040f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195290570284922008, guid: 566ec65f9219f564f9a5f52668b8040f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.20998096
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195290570284922008, guid: 566ec65f9219f564f9a5f52668b8040f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9777055
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195290570284922008, guid: 566ec65f9219f564f9a5f52668b8040f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195290570284922008, guid: 566ec65f9219f564f9a5f52668b8040f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195290570284922008, guid: 566ec65f9219f564f9a5f52668b8040f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195290570284922008, guid: 566ec65f9219f564f9a5f52668b8040f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -24.242
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195290570284922008, guid: 566ec65f9219f564f9a5f52668b8040f,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 16.725
+      objectReference: {fileID: 0}
+    - target: {fileID: 5524807118863949684, guid: 566ec65f9219f564f9a5f52668b8040f,
+        type: 3}
+      propertyPath: m_Name
+      value: Grass (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 566ec65f9219f564f9a5f52668b8040f, type: 3}
@@ -1165,7 +1244,6 @@ GameObject:
   - component: {fileID: 1838390366}
   - component: {fileID: 1838390365}
   - component: {fileID: 1838390364}
-  - component: {fileID: 1838390368}
   - component: {fileID: 1838390369}
   - component: {fileID: 1838390363}
   m_Layer: 0
@@ -1203,11 +1281,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce5b9abe27b0804cb9acfe5c491d818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 2
-  adrenalinSpeed: 3
-  jump_force: 6
-  critical_speed: 10
+  baseSpeed: 8
+  adrenalinSpeed: 0
+  jumpVelocity: 20
+  critical_speed: 25
+  fallingAdrenalin: 0.3
+  bulletAdrenalin: 0.3
   Bar: {fileID: 1479897006}
+  platformLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  is_grounded: 0
 --- !u!50 &1838390365
 Rigidbody2D:
   serializedVersion: 4
@@ -1223,7 +1307,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -1293,18 +1377,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1838390368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1838390362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce6ba2f6d031c7e41a373f9a358797af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1838390369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1319,7 +1391,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bar: {fileID: 1479897006}
   speed: 0.05
-  fill: 0
 --- !u!1001 &2110219333
 PrefabInstance:
   m_ObjectHideFlags: 0
