@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class movement : MonoBehaviour
 {
+    public Transform ground_check;
+    public float check_radius = 0.1f;
     public float baseSpeed = 2.0f;
     public float adrenalinSpeed = 1.0f;
     public float jumpVelocity = 70.0f;
@@ -134,13 +136,7 @@ public class movement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        float extraHeight = 0.01f;
-        RaycastHit2D raycastHit = Physics2D.Raycast(cc.bounds.center, Vector2.down, cc.bounds.extents.y * 1.5f + extraHeight, platformLayerMask);
-        Color rayColor = Color.red;
-        if (raycastHit.collider != null)
-            rayColor = Color.green;
-        Debug.DrawRay(cc.bounds.center, Vector2.down, rayColor, cc.bounds.extents.y * 1.5f + extraHeight);
-        return raycastHit.collider != null;
+        return Physics2D.OverlapCircle(ground_check.position, check_radius, platformLayerMask);
     }
 
     private void OnTriggerEnter2D(Collider2D other){
