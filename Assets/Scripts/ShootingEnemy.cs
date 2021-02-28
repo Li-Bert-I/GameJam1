@@ -57,7 +57,7 @@ public class ShootingEnemy : MonoBehaviour
 
     void ShootBullet()
     {
-        Vector3 shootDirection = (target.transform.position - transform.position).normalized;
+        Vector3 shootDirection = (target.transform.position - bulletEmitter.transform.position).normalized;
         Quaternion rotation = Quaternion.LookRotation(Vector3.forward, shootDirection);
         // rotation = Quaternion.identity;
         GameObject b = Instantiate(bulletPrefab, bulletEmitter.transform.position, rotation) as GameObject;
@@ -81,7 +81,7 @@ public class ShootingEnemy : MonoBehaviour
                 shootingTimer = 0.0f;
             }
         }
-        shootingTimer += Time.deltaTime;
+        shootingTimer += Time.fixedDeltaTime;
 
         if (!looks_right && walks_right)
         {
@@ -96,7 +96,7 @@ public class ShootingEnemy : MonoBehaviour
             float mov_x = 1.0f;
             if (!walks_right)
                  mov_x = -1.0f;
-            transform.Translate(mov_x * speed * Time.deltaTime, 0, 0);
+            transform.Translate(mov_x * speed * Time.fixedDeltaTime, 0, 0);
             walks_right = (TooLeft() || TooRight()) ? (TooLeft() && !TooRight()) : (walks_right);
         }
     }

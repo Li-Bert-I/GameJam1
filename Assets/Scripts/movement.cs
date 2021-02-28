@@ -24,6 +24,7 @@ public class movement : MonoBehaviour
     public AudioClip spikesDamage;
     public AudioClip wireDamage;
     public AudioClip jumpSound;
+    public AudioClip explosion;
 
     public Image Bar;
 
@@ -158,9 +159,19 @@ public class movement : MonoBehaviour
             Bar.fillAmount = Bar.fillAmount + bulletAdrenalin;
             freezedDelay = 0.5f;
             int direction = look_right ? 1 : -1;
-            rb.velocity = new Vector3(direction * 10.0f, 20.0f, 0);
+            rb.velocity = new Vector3(direction * 8.0f, 12.0f, 0);
             audioSrc.pitch = 1.0f;
-            audioSrc.PlayOneShot(spikesDamage, 0.4f);
+            audioSrc.PlayOneShot(spikesDamage, 0.8f);
+        }
+
+        if (other.tag == "Respawn") {
+            Debug.Log("END GAME!");
+            audioSrc.PlayOneShot(explosion, 1.0f);
+            Destroy(other.gameObject, 0.05f);
+        }
+
+        if (other.tag == "Finish") {
+            Debug.Log("WIN GAME!");
         }
     }
 

@@ -36,7 +36,7 @@ public class Sniper : MonoBehaviour
 
     void ShootBullet()
     {
-        Vector3 shootDirection = (target.transform.position - transform.position).normalized;
+        Vector3 shootDirection = (target.transform.position - bulletEmitter.transform.position).normalized;
         Quaternion rotation = Quaternion.LookRotation(Vector3.forward, shootDirection);
         // rotation = Quaternion.identity;
         GameObject b = Instantiate(bulletPrefab, bulletEmitter.transform.position, rotation) as GameObject;
