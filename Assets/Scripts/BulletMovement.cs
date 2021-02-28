@@ -8,7 +8,7 @@ public class BulletMovement : MonoBehaviour
         if(other.tag == "Ground"){
             // GameObject e = Instantiate(explosion) as GameObject;
             // e.transform.position = transform.position;
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, 0.05f);
         }
     }
 }

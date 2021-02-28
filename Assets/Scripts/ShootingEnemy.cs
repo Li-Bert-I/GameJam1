@@ -17,11 +17,19 @@ public class ShootingEnemy : MonoBehaviour
     public float shootingRange = 10.0f;
     public float speed = 1.0f;
 
+    public AudioClip[] shotSounds;
+
     private bool shooting;
     private bool walking;
+    private AudioSource audioSrc;
     private bool walks_right = true;
     private bool looks_right = false;
     private float shootingTimer = 0.0f;
+
+    void Start()
+    {
+        audioSrc = GetComponent<AudioSource>();
+    }
 
     bool IsPlayerClose()
     {
@@ -56,6 +64,8 @@ public class ShootingEnemy : MonoBehaviour
         b.transform.Rotate(0, 0, -90);
         b.GetComponent<Rigidbody2D>().velocity = shootDirection * bulletSpeed;
         Destroy(b, bulletLifeTime);
+        audioSrc.pitch = 1 + Random.Range(-0.2f, 0.2f);
+        audioSrc.PlayOneShot(shotSounds[Random.Range(0, shotSounds.Length)], 0.8f);
     }
 
     void FixedUpdate()
