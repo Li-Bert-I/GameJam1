@@ -132,7 +132,6 @@ public class movement : MonoBehaviour
                 bloodParticle.Play();
                 freezedDelay = fallFreezeDelay;
                 audioSrcDamage.PlayOneShot(fallDamage);
-                CameraShaker.Instance.ShakeOnce(4.0f, 4.0f, 1.0f, 1.0f);
             }
         }
         is_grounded = new_grounded_state;

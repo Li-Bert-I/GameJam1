@@ -23,6 +23,6 @@ public class AdrenalinBar : MonoBehaviour
         if (Bar.fillAmount < 0)
             Bar.fillAmount = 0;
 
-        audioSrc.volume = maxVolume * Mathf.Pow(Bar.fillAmount, 4.0f);
+        audioSrc.volume = maxVolume * Mathf.Pow(Bar.fillAmount, 5.0f);
     }
 }
