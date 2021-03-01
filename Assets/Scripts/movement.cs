@@ -20,11 +20,15 @@ public class movement : MonoBehaviour
     public float adrenalinPower = 1.0f;
     public float stepsRatio = 4.0f;
     public AudioClip[] stepsSounds;
+    public AudioClip[] bulletDamage;
     public AudioClip fallDamage;
     public AudioClip spikesDamage;
     public AudioClip wireDamage;
     public AudioClip jumpSound;
     public AudioClip explosion;
+    public GameObject sourceForDamageAudio;
+    public ParticleSystem adrenalinParticle;
+    public ParticleSystem bloodParticle;
 
     public Image Bar;
 
@@ -38,6 +42,7 @@ public class movement : MonoBehaviour
     private float freezedDelay = 0.0f;
     private bool inWire = false;
     private AudioSource audioSrc;
+    private AudioSource audioSrcDamage;
     private float maxSpeed;
     private bool wirePlays = false;
     private float stepsPlayFor = 0.0f;
@@ -47,6 +52,7 @@ public class movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<BoxCollider2D>();
         audioSrc = GetComponent<AudioSource>();
+        audioSrcDamage = sourceForDamageAudio.GetComponent<AudioSource>();
         maxSpeed = baseSpeed + adrenalinSpeed;
     }
 
@@ -88,11 +94,9 @@ public class movement : MonoBehaviour
             {
                 float targetStepsTime = 1 / (Mathf.Abs(mov_speed) * stepsRatio);
                 if (stepsPlayFor >= targetStepsTime) {
-                    if (!inWire) {
-                        audioSrc.pitch = 1 + Random.Range(-0.1f, 0.1f);
-                        audioSrc.PlayOneShot(stepsSounds[Random.Range(0, stepsSounds.Length)]);
-                        stepsPlayFor = 0.0f;
-                    }
+                    audioSrc.pitch = 1 + Random.Range(-0.1f, 0.1f);
+                    audioSrc.PlayOneShot(stepsSounds[Random.Range(0, stepsSounds.Length)]);
+                    stepsPlayFor = 0.0f;
                 } else {
                     stepsPlayFor += Time.fixedDeltaTime;
                 }
@@ -107,9 +111,9 @@ public class movement : MonoBehaviour
         if (inWire) {
             Bar.fillAmount = Bar.fillAmount + wireAdrenalin * Time.deltaTime;
             audioSrc.pitch = 1;
-            if (!audioSrc.isPlaying && Input.GetAxis("Horizontal") != 0)
+            if (!audioSrcDamage.isPlaying && Input.GetAxis("Horizontal") != 0)
             {
-                audioSrc.PlayOneShot(wireDamage, 1.0f);
+                audioSrcDamage.PlayOneShot(wireDamage, 1.0f);
                 wirePlays = true;
             }
         }
@@ -121,8 +125,12 @@ public class movement : MonoBehaviour
             {
                 Debug.Log("Damaged");
                 Bar.fillAmount = Bar.fillAmount + fallingAdrenalin;
+                adrenalinParticle.Stop();
+                adrenalinParticle.Play();
+                bloodParticle.Stop();
+                bloodParticle.Play();
                 freezedDelay = fallFreezeDelay;
-                audioSrc.PlayOneShot(fallDamage);
+                audioSrcDamage.PlayOneShot(fallDamage);
             }
         }
         is_grounded = new_grounded_state;
@@ -147,10 +155,17 @@ public class movement : MonoBehaviour
             Debug.Log("Bullet");
             Destroy(other.gameObject, 0.05f);
             Bar.fillAmount = Bar.fillAmount + bulletAdrenalin;
+            adrenalinParticle.Stop();
+            adrenalinParticle.Play();
+            bloodParticle.Stop();
+            bloodParticle.Play();
+            audioSrcDamage.PlayOneShot(bulletDamage[Random.Range(0, bulletDamage.Length)], 0.8f);
         }
 
         if(other.tag == "Barbwire") {
             Debug.Log("Wire");
+            adrenalinParticle.Stop();
+            adrenalinParticle.Play();
             inWire = true;
         }
 
@@ -160,13 +175,17 @@ public class movement : MonoBehaviour
             freezedDelay = 0.5f;
             int direction = look_right ? 1 : -1;
             rb.velocity = new Vector3(direction * 8.0f, 12.0f, 0);
-            audioSrc.pitch = 1.0f;
-            audioSrc.PlayOneShot(spikesDamage, 0.8f);
+            audioSrcDamage.pitch = 1.0f;
+            adrenalinParticle.Stop();
+            adrenalinParticle.Play();
+            bloodParticle.Stop();
+            bloodParticle.Play();
+            audioSrcDamage.PlayOneShot(spikesDamage, 0.8f);
         }
 
         if (other.tag == "Respawn") {
             Debug.Log("END GAME!");
-            audioSrc.PlayOneShot(explosion, 1.0f);
+            audioSrcDamage.PlayOneShot(explosion, 1.0f);
             Destroy(other.gameObject, 0.05f);
         }
 
