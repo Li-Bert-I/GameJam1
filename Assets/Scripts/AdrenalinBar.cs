@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class AdrenalinBar : MonoBehaviour
 {
     public float speed = 0.05f;
+    public float maxVolume = 0.5f;
 
     private AudioSource audioSrc;
     private Image Bar;
@@ -22,6 +23,6 @@ public class AdrenalinBar : MonoBehaviour
         if (Bar.fillAmount < 0)
             Bar.fillAmount = 0;
 
-        audioSrc.volume = Mathf.Pow(Bar.fillAmount, 3.0f) * 0.0f;
+        audioSrc.volume = maxVolume * Mathf.Pow(Bar.fillAmount, 4.0f);
     }
 }
