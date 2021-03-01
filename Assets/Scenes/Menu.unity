@@ -331,7 +331,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9c55f1b45a489f84fba6b40066ea77bd, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 168d163c7d5c767468ff0e7cf741f246, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -563,7 +563,7 @@ MonoBehaviour:
     spaceCount: 0
     wordCount: 1
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -1108,7 +1108,7 @@ PrefabInstance:
     - target: {fileID: 3456607388261521910, guid: 6a5b071e79c124a4b8e078843b405de5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 343
+      value: 334.79
       objectReference: {fileID: 0}
     - target: {fileID: 3456607388261521910, guid: 6a5b071e79c124a4b8e078843b405de5,
         type: 3}
@@ -1624,8 +1624,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 224, y: -1}
-  m_SizeDelta: {x: -685.7699, y: -478}
+  m_AnchoredPosition: {x: 206.55753, y: -1}
+  m_SizeDelta: {x: -650.88495, y: -478}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1364975146
 MonoBehaviour:
@@ -1722,7 +1722,7 @@ MonoBehaviour:
     spaceCount: 4
     wordCount: 4
     linkCount: 0
-    lineCount: 6
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -1782,8 +1782,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 224, y: -120}
-  m_SizeDelta: {x: -685.7699, y: -478}
+  m_AnchoredPosition: {x: 206.55753, y: -120}
+  m_SizeDelta: {x: -650.88495, y: -478}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1505265404
 MonoBehaviour:
@@ -1882,7 +1882,7 @@ MonoBehaviour:
     spaceCount: 20
     wordCount: 26
     linkCount: 0
-    lineCount: 20
+    lineCount: 9
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -2904,7 +2904,7 @@ PrefabInstance:
     - target: {fileID: 3456607388261521910, guid: 6a5b071e79c124a4b8e078843b405de5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 343
+      value: 334.79
       objectReference: {fileID: 0}
     - target: {fileID: 3456607388261521910, guid: 6a5b071e79c124a4b8e078843b405de5,
         type: 3}
@@ -3273,6 +3273,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MenuWithParticles
+      objectReference: {fileID: 0}
+    - target: {fileID: 8715961516611271688, guid: e0484563be1e4734f86ac7d49293ad44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0484563be1e4734f86ac7d49293ad44, type: 3}
