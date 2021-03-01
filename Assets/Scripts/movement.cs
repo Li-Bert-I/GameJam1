@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class movement : MonoBehaviour
 {
@@ -140,6 +141,14 @@ public class movement : MonoBehaviour
         return Physics2D.OverlapCircle(ground_check.position, check_radius, platformLayerMask);
     }
 
+    void Lose() {
+        SceneManager.LoadScene("Lose");
+    }
+
+    void Win() {
+        SceneManager.LoadScene("Win");
+    }
+
     private void OnTriggerEnter2D(Collider2D other){
         if(other.tag == "bullet"){
             // GameObject e = Instantiate(explosion) as GameObject;
@@ -168,10 +177,14 @@ public class movement : MonoBehaviour
             Debug.Log("END GAME!");
             audioSrc.PlayOneShot(explosion, 1.0f);
             Destroy(other.gameObject, 0.05f);
+            freezedDelay = 1.0f;
+            Invoke("Lose", 1.0f);
         }
 
         if (other.tag == "Finish") {
             Debug.Log("WIN GAME!");
+            freezedDelay = 1.0f;
+            Invoke("Win", 0.5f);
         }
     }
 
