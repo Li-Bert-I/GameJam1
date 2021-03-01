@@ -5090,6 +5090,8 @@ MonoBehaviour:
   sourceForDamageAudio: {fileID: 1483713372457055632}
   adrenalinParticle: {fileID: 1483713372892909774}
   bloodParticle: {fileID: 1483713374564181260}
+  rocketExplosion: {fileID: 4792055182181326999, guid: 276dc66961a6ef04696c3ed632ac9064,
+    type: 3}
   Bar: {fileID: 0}
   platformLayerMask:
     serializedVersion: 2

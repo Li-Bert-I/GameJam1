@@ -30,6 +30,7 @@ public class movement : MonoBehaviour
     public GameObject sourceForDamageAudio;
     public ParticleSystem adrenalinParticle;
     public ParticleSystem bloodParticle;
+    public GameObject rocketExplosion;
 
     public Image Bar;
 
@@ -195,6 +196,7 @@ public class movement : MonoBehaviour
         if (other.tag == "Respawn") {
             Debug.Log("END GAME!");
             audioSrcDamage.PlayOneShot(explosion, 1.0f);
+            GameObject b = Instantiate(rocketExplosion, other.gameObject.transform.position, Quaternion.identity) as GameObject;
             Destroy(other.gameObject, 0.05f);
             freezedDelay = 1.0f;
             Invoke("Lose", 1.0f);
